@@ -22,7 +22,7 @@ export function StatCard({
   subtitle,
   className,
   children,
-  accentColor,
+  accentColor: _accentColor,
 }: StatCardProps) {
   const [animate, setAnimate] = useState(false);
   const prevValue = useRef(value);
@@ -40,17 +40,11 @@ export function StatCard({
   return (
     <div
       className={cn(
-        'group relative rounded-xl bg-card border border-border/50 shadow-card hover:shadow-card-hover transition-all duration-300 overflow-hidden animate-fade-in',
+        'group relative rounded-xl bg-card/90 backdrop-blur-sm shadow-card hover:shadow-card-hover hover:shadow-md transition-all duration-300 overflow-hidden animate-fade-in',
         className,
       )}
     >
-      {accentColor && (
-        <div
-          className="absolute top-0 left-0 right-0 h-0.5 opacity-80"
-          style={{ background: accentColor }}
-        />
-      )}
-      <div className={cn('p-3.5', accentColor && 'pt-4')}>
+      <div className="p-3.5">
         <div className="flex items-center justify-between mb-1.5">
           <span className="text-[11px] text-muted-foreground font-semibold uppercase tracking-wider">
             {title}

@@ -19,8 +19,8 @@ const colorMap = {
 const glowMap = {
   default: 'shadow-glow-sm',
   green: 'shadow-glow-green',
-  yellow: 'shadow-[0_0_12px_-2px_hsla(45,93%,47%,0.25)]',
-  red: 'shadow-[0_0_12px_-2px_hsla(0,72%,51%,0.25)]',
+  yellow: 'shadow-[0_0_8px_-2px_hsla(45,93%,47%,0.2)]',
+  red: 'shadow-[0_0_8px_-2px_hsla(0,72%,51%,0.2)]',
 };
 
 export function ProgressBar({

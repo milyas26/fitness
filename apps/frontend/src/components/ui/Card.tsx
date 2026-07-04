@@ -4,19 +4,17 @@ interface CardProps {
   className?: string;
   children: React.ReactNode;
   variant?: 'default' | 'elevated' | 'glow';
-  accent?: boolean;
   style?: React.CSSProperties;
 }
 
-export function Card({ className, children, variant = 'default', accent = false, style }: CardProps) {
+export function Card({ className, children, variant = 'default', style }: CardProps) {
   return (
     <div
       className={cn(
-        'rounded-xl border bg-card transition-all duration-300',
-        variant === 'default' && 'border-border/60 shadow-card hover:shadow-card-hover',
-        variant === 'elevated' && 'border-border/40 shadow-lg hover:shadow-xl',
-        variant === 'glow' && 'ring-glow shadow-glow-sm',
-        accent && 'stripe-accent pt-px',
+        'rounded-xl transition-all duration-300',
+        variant === 'default' && 'bg-card shadow-card hover:shadow-card-hover',
+        variant === 'elevated' && 'bg-card/90 backdrop-blur-sm shadow-sm hover:shadow-md',
+        variant === 'glow' && 'bg-card/95 ring-1 ring-primary/10 shadow-glow-sm hover:shadow-glow',
         className,
       )}
       style={style}

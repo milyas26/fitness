@@ -119,7 +119,7 @@ export default function BodyPage() {
                     border: '1px solid hsl(var(--border))',
                     borderRadius: '10px',
                     fontSize: '11px',
-                    boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
+                    boxShadow: '0 2px 8px rgba(0,0,0,0.06)',
                   }}
                   labelFormatter={(v: string) =>
                     new Date(v + 'T12:00:00').toLocaleDateString('en', {

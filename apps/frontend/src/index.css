@@ -18,7 +18,7 @@
     --accent: 35 40% 88%;
     --accent-foreground: 20 10% 14%;
     --border: 30 8% 88%;
-    --radius: 0.75rem;
+    --radius: 0.625rem;
     --ring: 18 75% 50%;
 
     --gradient-primary: linear-gradient(135deg, hsl(18,75%,55%), hsl(12,80%,45%));
@@ -77,21 +77,8 @@
   .glass-strong {
     @apply bg-card/85 backdrop-blur-2xl border border-border/50;
   }
-  .stripe-accent {
-    position: relative;
-  }
-  .stripe-accent::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 3px;
-    background: var(--gradient-heat);
-    border-radius: var(--radius) var(--radius) 0 0;
-  }
   .ring-glow {
-    box-shadow: 0 0 0 1px hsla(18, 75%, 50%, 0.2);
+    box-shadow: 0 0 0 1px hsla(18, 75%, 50%, 0.15);
   }
   .text-gradient {
     -webkit-background-clip: text;
