@@ -1,0 +1,162 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Settings {
+  id                    String   @id @default(uuid())
+  height_cm             Float
+  target_weight_kg      Float
+  daily_calories        Int
+  daily_protein_g       Int
+  daily_carbs_g         Int
+  daily_fat_g           Int
+  daily_fiber_g         Int
+  daily_water_ml        Int
+  current_split         String
+  workout_days_per_week Int
+  updated_at            DateTime @updatedAt
+}
+
+model NutritionEntry {
+  id         String   @id @default(uuid())
+  food_name  String
+  quantity   Float    @default(1)
+  calories   Int
+  protein_g  Float
+  carbs_g    Float
+  fat_g      Float
+  fiber_g    Float    @default(0)
+  meal_time  String
+  notes      String?
+  source     String   @default("manual")
+  entry_date DateTime
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  @@index([entry_date])
+}
+
+model WorkoutSession {
+  id               String            @id @default(uuid())
+  date             DateTime
+  split            String
+  duration_minutes Int
+  notes            String?
+  source           String            @default("manual")
+  exercises        WorkoutExercise[]
+  created_at       DateTime          @default(now())
+  updated_at       DateTime          @updatedAt
+
+  @@index([date])
+}
+
+model WorkoutExercise {
+  id         String         @id @default(uuid())
+  session_id String
+  session    WorkoutSession @relation(fields: [session_id], references: [id], onDelete: Cascade)
+  name       String
+  weight_kg  Float
+  reps       Int
+  sets       Int
+  order      Int            @default(0)
+  created_at DateTime       @default(now())
+
+  @@index([session_id])
+}
+
+model BodyMeasurement {
+  id                String   @id @default(uuid())
+  date              DateTime
+  morning_weight_kg Float
+  waist_cm          Float?
+  source            String   @default("manual")
+  created_at        DateTime @default(now())
+
+  @@unique([date])
+  @@index([date])
+}
+
+model RecoveryLog {
+  id               String   @id @default(uuid())
+  date             DateTime
+  sleep_hours      Float
+  energy_level     Int
+  muscle_soreness  String
+  notes            String?
+  source           String   @default("manual")
+  created_at       DateTime @default(now())
+
+  @@unique([date])
+  @@index([date])
+}
+
+model SupplementLog {
+  id           String   @id @default(uuid())
+  date         DateTime
+  creatine     Boolean  @default(false)
+  whey_protein Boolean  @default(false)
+  fish_oil     Boolean  @default(false)
+  vitamin_d    Boolean  @default(false)
+  extra        Json?
+  notes        String?
+  source       String   @default("manual")
+  created_at   DateTime @default(now())
+
+  @@unique([date])
+  @@index([date])
+}
+
+model DailyReport {
+  id              String   @id @default(uuid())
+  date            DateTime
+  content_md      String
+  nutrition_score Float?
+  workout_score   Float?
+  recovery_score  Float?
+  bulking_score   Float?
+  created_at      DateTime @default(now())
+
+  @@unique([date])
+}
+
+model WeeklyReport {
+  id         String   @id @default(uuid())
+  week_start DateTime
+  content_md String
+  created_at DateTime @default(now())
+
+  @@unique([week_start])
+}
+
+model MonthlyReport {
+  id          String   @id @default(uuid())
+  month_start DateTime
+  content_md  String
+  created_at  DateTime @default(now())
+
+  @@unique([month_start])
+}
+
+model HermesConversation {
+  id         String   @id @default(uuid())
+  raw_text   String
+  source     String   @default("telegram")
+  message_id String?
+  chat_id    String?
+  created_at DateTime @default(now())
+}
+
+model IngestLog {
+  id               String   @id @default(uuid())
+  idempotency_key  String   @unique
+  conversation_id  String?
+  request_body     Json
+  status           String
+  error_message    String?
+  created_at       DateTime @default(now())
+}

@@ -1,0 +1,21 @@
+{
+  "name": "fitness",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "pnpm --parallel -r run dev",
+    "build": "pnpm -r run build",
+    "lint": "pnpm -r run lint",
+    "typecheck": "pnpm -r run typecheck",
+    "format": "prettier --write \"**/*.{ts,tsx,json,md}\"",
+    "format:check": "prettier --check \"**/*.{ts,tsx,json,md}\"",
+    "db:migrate": "pnpm --filter @fitness/backend run db:migrate",
+    "db:generate": "pnpm --filter @fitness/backend run db:generate",
+    "db:studio": "pnpm --filter @fitness/backend run db:studio",
+    "db:seed": "pnpm --filter @fitness/backend run db:seed"
+  },
+  "devDependencies": {
+    "prettier": "^3.3.0",
+    "typescript": "^5.5.0"
+  }
+}
