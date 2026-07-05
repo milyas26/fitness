@@ -20,5 +20,8 @@ export const nutritionApi = {
   update: (id: string, data: Partial<CreateNutritionEntry>) =>
     apiPatch<NutritionEntry>(`/nutrition/${id}`, data),
 
+  getCaloriesRange: (start: string, end: string) =>
+    apiGet<{ date: string; calories: number }[]>('/nutrition/calories-range', { start, end }),
+
   delete: (id: string) => apiDelete(`/nutrition/${id}`),
 };

@@ -46,6 +46,15 @@ export const nutritionRepository = {
     });
   },
 
+  caloriesByDateRange(startDate: Date, endDate: Date) {
+    return prisma.nutritionEntry.groupBy({
+      by: ['entry_date'],
+      where: { entry_date: { gte: startDate, lte: endDate } },
+      _sum: { calories: true },
+      orderBy: { entry_date: 'asc' },
+    });
+  },
+
   findDateRange(startDate: Date, endDate: Date) {
     return prisma.nutritionEntry.findMany({
       where: {

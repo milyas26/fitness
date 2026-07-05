@@ -81,6 +81,14 @@ export const nutritionService = {
     };
   },
 
+  async getCaloriesRange(startDate: Date, endDate: Date) {
+    const results = await nutritionRepository.caloriesByDateRange(startDate, endDate);
+    return results.map((r) => ({
+      date: r.entry_date.toISOString().slice(0, 10),
+      calories: r._sum.calories || 0,
+    }));
+  },
+
   async getRange(startDate: Date, endDate: Date) {
     return nutritionRepository.findDateRange(startDate, endDate);
   },

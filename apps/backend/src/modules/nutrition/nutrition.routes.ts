@@ -24,6 +24,14 @@ export async function nutritionRoutes(app: FastifyInstance) {
     return reply.send({ success: true, message: '', data });
   });
 
+  app.get('/calories-range', async (request, reply) => {
+    const query = request.query as { start?: string; end?: string };
+    const startDate = parseDate(query.start);
+    const endDate = parseDate(query.end);
+    const data = await nutritionService.getCaloriesRange(startDate, endDate);
+    return reply.send({ success: true, message: '', data });
+  });
+
   app.get('/:id', async (request, reply) => {
     const { id } = request.params as { id: string };
     const data = await nutritionService.getById(id);

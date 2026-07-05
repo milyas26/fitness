@@ -1,11 +1,12 @@
-import { useRef } from 'react';
+import { useState } from 'react';
 import { ChevronLeft, ChevronRight, Calendar } from 'lucide-react';
 import { useDate } from '../../contexts/DateContext';
 import { todayStr, addDays } from '../../lib/utils';
+import { CalorieCalendar } from './CalorieCalendar';
 
 export function DateNavigator() {
-  const { selectedDate, setSelectedDate, goToPrevDay, goToNextDay } = useDate();
-  const inputRef = useRef<HTMLInputElement>(null);
+  const { selectedDate, goToPrevDay, goToNextDay } = useDate();
+  const [isPickerOpen, setIsPickerOpen] = useState(false);
   const today = todayStr();
   const isToday = selectedDate === today;
 
@@ -31,7 +32,7 @@ export function DateNavigator() {
       </button>
 
       <button
-        onClick={() => inputRef.current?.showPicker()}
+        onClick={() => setIsPickerOpen(true)}
         className="flex-1 flex items-center justify-center gap-2 h-10 px-4 rounded-xl bg-card border border-border/40 hover:border-primary/30 transition-all duration-200 shadow-sm"
       >
         <Calendar className="w-4 h-4 text-primary/70 shrink-0" />
@@ -49,16 +50,7 @@ export function DateNavigator() {
         <ChevronRight className="w-4 h-4" />
       </button>
 
-      <input
-        ref={inputRef}
-        type="date"
-        value={selectedDate}
-        max={today}
-        onChange={(e) => {
-          if (e.target.value) setSelectedDate(e.target.value);
-        }}
-        className="sr-only"
-      />
+      <CalorieCalendar open={isPickerOpen} onClose={() => setIsPickerOpen(false)} />
     </div>
   );
 }
