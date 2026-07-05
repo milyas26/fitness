@@ -2,7 +2,7 @@
 
 Personal fitness tracking dashboard with AI-powered reports via Hermes Telegram Bot.
 
-<img width="854" height="1859" alt="image" src="https://github.com/user-attachments/assets/57380550-5067-4315-9010-558c104e31f9" />
+<img width="276" height="600" alt="image" src="https://github.com/user-attachments/assets/57380550-5067-4315-9010-558c104e31f9" />
 
 
 ## Architecture
