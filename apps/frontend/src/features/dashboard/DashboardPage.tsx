@@ -57,7 +57,7 @@ function FoodEntryRow({ entry }: { entry: NutritionEntry }) {
       </div>
       <div className="min-w-0 flex-1">
         <div className="flex items-center gap-2">
-          <span className="text-sm font-medium truncate">{entry.food_name}</span>
+          <span className="text-sm font-medium">{entry.food_name}</span>
           {entry.source === 'hermes' && (
             <span className="text-[9px] px-1.5 py-0.5 rounded-full bg-purple-500/10 text-purple-400 font-semibold shrink-0">
               AI
