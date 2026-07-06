@@ -21,7 +21,9 @@ export async function bodyRoutes(app: FastifyInstance) {
   app.get('/trend', async (request, reply) => {
     const query = request.query as { start?: string; end?: string; days?: string };
     const days = parseInt(query.days || '30', 10);
-    const endDate = query.end ? parseDate(query.end) : new Date();
+    const endDate = query.end
+      ? parseDate(query.end)
+      : new Date(Date.UTC(new Date().getUTCFullYear(), new Date().getUTCMonth(), new Date().getUTCDate() + 1));
     const startDate = query.start
       ? parseDate(query.start)
       : new Date(endDate.getTime() - days * 24 * 60 * 60 * 1000);
