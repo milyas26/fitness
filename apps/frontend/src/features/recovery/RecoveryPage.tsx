@@ -4,7 +4,7 @@ import { useDate } from '../../contexts/DateContext';
 import { Card, CardContent } from '../../components/ui/Card';
 import { Skeleton } from '../../components/ui/Skeleton';
 import { Bed, Battery, Activity, Clock } from 'lucide-react';
-import { cn } from '../../lib/utils';
+import { cn, todayStr, addDays } from '../../lib/utils';
 
 const sorenessColors: Record<string, string> = {
   none: 'text-green-400',
@@ -93,10 +93,9 @@ export default function RecoveryPage() {
   const { data: range } = useQuery({
     queryKey: ['recovery', 'range'],
     queryFn: () => {
-      const end = new Date();
-      const start = new Date();
-      start.setDate(start.getDate() - 6);
-      return recoveryApi.getRange(start.toISOString().slice(0, 10), end.toISOString().slice(0, 10));
+      const end = todayStr();
+      const start = addDays(end, -6);
+      return recoveryApi.getRange(start, end);
     },
   });
 
